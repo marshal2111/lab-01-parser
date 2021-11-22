@@ -16,7 +16,7 @@ using json = nlohmann::json;
 TEST(global, json)
 {
     std::stringstream os;
-    processJSON("tests/test1.json", os);
+    processJSON("../tests/test1.json", os);
     ASSERT_EQ("| name                | group               | avg                 | debt                |\n"
         "|---------------------|---------------------|---------------------|---------------------|\n"
         "| Ivanov Petr         | null                | 4.25                | 123                 |\n"
