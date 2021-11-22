@@ -35,13 +35,13 @@ TEST(itemsNotArray, json)
 
 TEST(wrongMeta, json) {
     std::stringstream os;
-    EXPECT_THROW(processJSON("../tests/test13.jso", os), std::runtime_error);
+    EXPECT_THROW(processJSON("../tests/test3.jso", os), std::runtime_error);
 }
 
 TEST(global2, json)
 {
     std::stringstream os;
-    processJSON("../tests/test1.json", os);
+    processJSON("../tests/test4.json", os);
     ASSERT_EQ("| name                | group               | avg                 | debt                |\n"
     "|---------------------|---------------------|---------------------|---------------------|\n"
     "| Ivan Ivanov         | 1                   | 4.25                | null                |\n"
