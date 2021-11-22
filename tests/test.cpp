@@ -30,13 +30,27 @@ TEST(global, json)
 TEST(itemsNotArray, json)
 {
     std::stringstream os;
-    EXPECT_THROW(processJSON("tests/test2.json", os), std::runtime_error);
+    EXPECT_THROW(processJSON("../tests/test2.jso", os), std::runtime_error);
 }
 
 TEST(wrongMeta, json) {
     std::stringstream os;
-    EXPECT_THROW(processJSON("tests/test3.json", os), std::runtime_error);
+    EXPECT_THROW(processJSON("../tests/test13.jso", os), std::runtime_error);
 }
 
+TEST(global2, json)
+{
+    std::stringstream os;
+    processJSON("../tests/test1.json", os);
+    ASSERT_EQ("| name                | group               | avg                 | debt                |\n"
+    "|---------------------|---------------------|---------------------|---------------------|\n"
+    "| Ivan Ivanov         | 1                   | 4.25                | null                |\n"
+    "|---------------------|---------------------|---------------------|---------------------|\n"
+    "| Sidorov Ivan        | 31                  | 4                   | C++                 |\n"
+    "|---------------------|---------------------|---------------------|---------------------|\n"
+    "| Pertov Nikita       | IU8-31              | 3.33                | 3 items             |\n"
+    "|---------------------|---------------------|---------------------|---------------------|\n"
+    , os.str());
+}
 
 #endif // TEST_CPP_
