@@ -16,7 +16,7 @@ using json = nlohmann::json;
 TEST(global, json)
 {
     std::stringstream os;
-    processJSON("test1.json", os);
+    processJSON("tests/test1.json", os);
     ASSERT_EQ("| name                | group               | avg                 | debt                |\n"
         "|---------------------|---------------------|---------------------|---------------------|\n"
         "| Ivanov Petr         | null                | 4.25                | 123                 |\n"
@@ -30,12 +30,12 @@ TEST(global, json)
 TEST(itemsNotArray, json)
 {
     std::stringstream os;
-    EXPECT_THROW(processJSON("test2.json", os), std::runtime_error);
+    EXPECT_THROW(processJSON("tests/test2.json", os), std::runtime_error);
 }
 
 TEST(wrongMeta, json) {
     std::stringstream os;
-    EXPECT_THROW(processJSON("test3.json", os), std::runtime_error);
+    EXPECT_THROW(processJSON("tests/test3.json", os), std::runtime_error);
 }
 
 
