@@ -84,14 +84,14 @@ void printStudent(const st::student_t& student, std::ostream& os) {
       os
         << " " << std::left << std::setw(20) 
         << std::any_cast<std::string>(student.avg) << "|";
-  } else if (student.avg.type() == typeid(float)) {
+  } else if (student.avg.type() == typeid(double)) {
       os
         << " " << std::left << std::setw(20) 
-        << std::any_cast<float>(student.avg) << "|";
+        << std::any_cast<double>(student.avg) << "|";
   } else {
     os
       << " " << std::left << std::setw(20) 
-      << std::any_cast<double>(student.avg) << "|";
+      << std::any_cast<unsigned long>(student.avg) << "|";
   }
 
   //printing debt
@@ -116,7 +116,7 @@ void printStudent(const st::student_t& student, std::ostream& os) {
     << std::left << std::setw(22) << "|" << "|" << std::endl;
 }
 
-void processJSON(const std::string& jsonPath, std::ostream& os) {
+void processJSON(const std::string& jsonPath, std::stringstream& os) {
 
   std::ifstream file{jsonPath};
   if (!file) {
@@ -138,6 +138,7 @@ void processJSON(const std::string& jsonPath, std::ostream& os) {
     st::student_t student = item.get<st::student_t>();
     printStudent(student, os);
   }
+  std::cout << os.str();
 }
 
 

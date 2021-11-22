@@ -5,7 +5,12 @@ using nlohmann::json;
 namespace st {
 
     auto get_name(const json& j) -> std::string {
-        return j.get<std::string>();
+        if (j.is_null())
+            return nullptr;
+        else if (j.is_string())
+            return j.get<std::string>();
+        else 
+            return nullptr;
     }
 
     auto get_debt(const json& j) -> std::any {
