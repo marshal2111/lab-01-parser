@@ -1,0 +1,18 @@
+{
+  "items": [
+    {
+      "name": "Ivanov Petr",
+      "group": null,
+      "avg": 4.25,
+      "debt": "123"
+    },
+    {
+      "name": "Sidorov Ivan",
+      "group": 31,
+      "avg": "4",
+      "debt": "C++"
+    } ],
+  "_meta": {
+    "count": 2
+  }
+} 

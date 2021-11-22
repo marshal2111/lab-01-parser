@@ -1,0 +1,42 @@
+// Copyright 2021 Your Name <your_email>
+#define TEST_CPP_
+#ifdef TEST_CPP_
+
+#include <stdexcept>
+
+#include <gtest/gtest.h>
+
+#include <student.hpp>
+#include "../sources/main.cpp"
+
+using namespace std;
+
+using json = nlohmann::json;
+
+TEST(global, json)
+{
+    std::stringstream os;
+    processJSON("/home/ilya/clabs/lab-01-parser/tests/test1.json", os);
+    ASSERT_EQ("| name                | group               | avg                 | debt                |\n"
+        "|---------------------|---------------------|---------------------|---------------------|\n"
+        "| Ivanov Petr         | null                | 4.25                | 123                 |\n"
+        "|---------------------|---------------------|---------------------|---------------------|\n"
+        "| Sidorov Ivan        | 31                  | 4                   | C++                 |\n"
+        "|---------------------|---------------------|---------------------|---------------------|\n"
+    , os.str());
+
+}
+
+TEST(itemsNotArray, json)
+{
+    std::stringstream os;
+    EXPECT_THROW(processJSON("/home/ilya/clabs/lab-01-parser/tests/test2.json", os), std::runtime_error);
+}
+
+TEST(wrongMeta, json) {
+    std::stringstream os;
+    EXPECT_THROW(processJSON("/home/ilya/clabs/lab-01-parser/tests/test3.json", os), std::runtime_error);
+}
+
+
+#endif // TEST_CPP_
