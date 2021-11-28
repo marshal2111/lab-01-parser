@@ -10,6 +10,7 @@
 #include <cinttypes>
 
 using nlohmann::json;
+typedef unsigned long uint32;
 
 bool isItemsArray(const json& j)
 {
@@ -65,7 +66,7 @@ void printStudent(const st::student_t& student, std::ostream& os) {
     //std::cout << student.group.type().name();
       os
         << " " << std::left << std::setw(20)
-        << std::any_cast<uint32_t>(student.group) << "|";
+        << std::any_cast<uint32>(student.group) << "|";
   }
 
   //printing avg
@@ -84,7 +85,7 @@ void printStudent(const st::student_t& student, std::ostream& os) {
   } else {
     os
       << " " << std::left << std::setw(20)
-      << std::any_cast<uint32_t>(student.avg) << "|";
+      << std::any_cast<uint32>(student.avg) << "|";
   }
 
   //printing debt
@@ -120,8 +121,8 @@ void processJSON(const std::string& jsonPath, std::stringstream& os) {
     throw std::runtime_error("Error: \"items\" expected to be array");
   }
   if (!isMetaValid(data)) {
-    throw std::runtime_error("Error: number of students doesn’t match \
-                             \"meta\" parameter");
+    std::string ex = "Error: number of students doesn’t match \"meta\"";
+    throw std::runtime_error(ex);
   }
   printHeader(os);
   for (auto const& item : data.at("items")) {
