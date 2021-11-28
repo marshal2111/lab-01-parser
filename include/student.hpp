@@ -1,7 +1,7 @@
 // Copyright 2021 Your Name <your_email>
 
-#ifndef INCLUDE_EXAMPLE_HPP_
-#define INCLUDE_EXAMPLE_HPP_
+#ifndef INCLUDE_STUDENT_HPP_
+#define INCLUDE_STUDENT_HPP_
 
 #include <nlohmann/json.hpp>
 #include <string>
@@ -12,12 +12,14 @@
 #include <any>
 
 namespace st {
-	struct student_t {
-    	std::string name;
-    	std::any group;
-    	std::any avg;
-    	std::any debt;
-	};
+
+struct student_t {
+    std::string name;
+    std::any group;
+    std::any avg;
+    std::any debt;
+};
+
 }
 
-#endif // INCLUDE_EXAMPLE_HPP_
+#endif // INCLUDE_STUDENT_HPP_
