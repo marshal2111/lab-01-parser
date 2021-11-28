@@ -10,7 +10,7 @@
 #include <cinttypes>
 
 using nlohmann::json;
-typedef unsigned long uint32;
+typedef unsigned long int uint32;
 
 bool isItemsArray(const json& j)
 {
