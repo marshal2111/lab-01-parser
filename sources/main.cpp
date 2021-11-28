@@ -7,6 +7,7 @@
 #include <filesystem>
 #include <fstream>
 #include <iostream>
+#include <cinttypes>
 
 using nlohmann::json;
 
@@ -14,7 +15,6 @@ bool isItemsArray(const json& j)
 {
   if (!j.at("items").is_array()) {
     return false;
-    throw std::runtime_error("Error: \"items\" expected to be array");
   } else {
     return true;
   }
@@ -26,13 +26,12 @@ bool isMetaValid(const json& j)
   count = j.at("items").size();
   if (static_cast<int>(j.at("_meta").at("count")) != count) {
     return false;
-    throw std::runtime_error("Error: number of students doesn’t match \"meta\"");
   } else {
     return true;
   }
 }
 
-void printHeader(std::ostream& os) 
+void printHeader(std::ostream& os)
 {
   os
     << "|" << std::left << std::setw(20) << " name" << " |"
@@ -47,7 +46,6 @@ void printHeader(std::ostream& os)
 
 
 void printStudent(const st::student_t& student, std::ostream& os) {
-
   //printing name
   os << std::setfill(' ');
   os
@@ -67,7 +65,7 @@ void printStudent(const st::student_t& student, std::ostream& os) {
     //std::cout << student.group.type().name();
       os
         << " " << std::left << std::setw(20)
-        << std::any_cast<unsigned long>(student.group) << "|";
+        << std::any_cast<uint32_t>(student.group) << "|";
   }
 
   //printing avg
@@ -86,7 +84,7 @@ void printStudent(const st::student_t& student, std::ostream& os) {
   } else {
     os
       << " " << std::left << std::setw(20)
-      << std::any_cast<unsigned long>(student.avg) << "|";
+      << std::any_cast<uint32_t>(student.avg) << "|";
   }
 
   //printing debt
@@ -99,9 +97,10 @@ void printStudent(const st::student_t& student, std::ostream& os) {
         << " " << std::left << std::setw(20)
         << std::any_cast<std::string>(student.debt) << "|";
   } else {
+      int dsize = std::any_cast<std::vector<std::string>>(student.debt).size();
       os
         << " " << std::left << std::setw(20)
-        << std::to_string(std::any_cast<std::vector<std::string> >(student.debt).size()) + " items" << "|";
+        << std::to_string(dsize) + " items" << "|";
   }
   os
     << std::endl << std::setfill('-') << std::left << std::setw(22) << "|"
@@ -121,7 +120,8 @@ void processJSON(const std::string& jsonPath, std::stringstream& os) {
     throw std::runtime_error("Error: \"items\" expected to be array");
   }
   if (!isMetaValid(data)) {
-    throw std::runtime_error("Error: number of students doesn’t match \"meta\" parameter");
+    throw std::runtime_error("Error: number of students doesn’t match \
+                             \"meta\" parameter");
   }
   printHeader(os);
   for (auto const& item : data.at("items")) {
