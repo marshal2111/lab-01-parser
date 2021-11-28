@@ -5,6 +5,7 @@
 
 #include <nlohmann/json.hpp>
 #include <string>
+#include <vector>
 #include <any>
 
 using nlohmann::json;
@@ -23,7 +24,7 @@ auto get_name(const json& j) -> std::string {
             return nullptr;
         else if (j.is_string())
             return j.get<std::string>();
-        else 
+        else
             return nullptr;
     }
 
@@ -63,6 +64,6 @@ auto get_name(const json& j) -> std::string {
         s.debt = get_debt(j.at("debt"));
     }
 
-}
+} // namespace st
 
 #endif // INCLUDE_STUDENT_HPP_
