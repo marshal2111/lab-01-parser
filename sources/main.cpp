@@ -10,7 +10,7 @@
 #include <cinttypes>
 
 using nlohmann::json;
-typedef unsigned long int uint32;
+//typedef unsigned long int uint32;
 
 bool isItemsArray(const json& j)
 {
@@ -66,7 +66,7 @@ void printStudent(const st::student_t& student, std::ostream& os) {
     //std::cout << student.group.type().name();
       os
         << " " << std::left << std::setw(20)
-        << std::any_cast<uint32>(student.group) << "|";
+        << std::any_cast<uint64_t>(student.group) << "|";
   }
 
   //printing avg
@@ -85,7 +85,7 @@ void printStudent(const st::student_t& student, std::ostream& os) {
   } else {
     os
       << " " << std::left << std::setw(20)
-      << std::any_cast<uint32>(student.avg) << "|";
+      << std::any_cast<uint64_t>(student.avg) << "|";
   }
 
   //printing debt
