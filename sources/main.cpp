@@ -3,6 +3,7 @@
 #include <stdexcept>
 
 #include <student.hpp>
+#include <json_util.hpp>
 #include <exception>
 #include <filesystem>
 #include <fstream>

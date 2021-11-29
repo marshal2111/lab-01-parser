@@ -3,16 +3,17 @@
 #ifdef TEST_CPP_
 
 #include <stdexcept>
-
 #include <gtest/gtest.h>
-
-#include <student.hpp>
-#include "../sources/main.cpp"
+#include <json_util.hpp>
+#include <nlohmann/json.hpp>
+#include <string>
+#include <filesystem>
+#include <fstream>
+#include <iostream>
 
 using namespace std;
 
 using json = nlohmann::json;
-
 
 TEST(empty, json)
 {
