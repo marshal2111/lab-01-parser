@@ -13,6 +13,12 @@ using namespace std;
 
 using json = nlohmann::json;
 
+
+TEST(empty, json)
+{
+    
+}
+
 TEST(global, json)
 {
     std::stringstream os;
