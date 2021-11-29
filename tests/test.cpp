@@ -16,7 +16,7 @@ using json = nlohmann::json;
 
 TEST(empty, json)
 {
-    
+
 }
 
 TEST(global, json)
@@ -36,12 +36,12 @@ TEST(global, json)
 TEST(itemsNotArray, json)
 {
     std::stringstream os;
-    EXPECT_THROW(processJSON("../tests/test2.jso", os), std::runtime_error);
+    EXPECT_THROW(processJSON("../tests/test2.json", os), std::runtime_error);
 }
 
 TEST(wrongMeta, json) {
     std::stringstream os;
-    EXPECT_THROW(processJSON("../tests/test3.jso", os), std::runtime_error);
+    EXPECT_THROW(processJSON("../tests/test3.json", os), std::runtime_error);
 }
 
 TEST(global2, json)
