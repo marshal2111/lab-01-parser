@@ -39,9 +39,9 @@ add_library(${PROJECT_NAME} STATIC
   ${CMAKE_CURRENT_SOURCE_DIR}/sources/main.cpp
 )
 
-add_executable(demo
-  ${CMAKE_CURRENT_SOURCE_DIR}/demo/demo.cpp
-)
+#add_executable(demo
+#  ${CMAKE_CURRENT_SOURCE_DIR}/demo/demo.cpp
+#)
 
 target_link_libraries(${PROJECT_NAME} nlohmann_json::nlohmann_json)
 target_link_libraries(demo nlohmann_json::nlohmann_json)
@@ -51,6 +51,15 @@ target_include_directories(${PROJECT_NAME} PUBLIC
   "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
   "$<INSTALL_INTERFACE:include>"
 )
+
+if(BUILD_TESTS)
+  add_executable(tests
+    ${CMAKE_CURRENT_SOURCE_DIR}/tests/test.cpp
+  )
+  target_link_libraries(tests ${PROJECT_NAME} GTest::gtest_main)
+  enable_testing()
+  add_test(NAME unit_tests COMMAND tests)
+endif()
 
 if(BUILD_COVERAGE)
   set(ENABLE_COVERAGE ON CACHE BOOL "Enable coverage build." FORCE)
@@ -82,17 +91,6 @@ install(TARGETS ${PROJECT_NAME} demo
   LIBRARY DESTINATION lib
   INCLUDES DESTINATION include
 )
-
-
-if(BUILD_TESTS)
-  add_executable(tests
-    ${CMAKE_CURRENT_SOURCE_DIR}/tests/test.cpp
-  )
-  target_link_libraries(tests ${PROJECT_NAME} GTest::gtest_main)
-  enable_testing()
-  add_test(NAME unit_tests COMMAND tests)
-endif()
-
 
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/ DESTINATION include)
 
