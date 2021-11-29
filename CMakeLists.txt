@@ -52,15 +52,6 @@ target_include_directories(${PROJECT_NAME} PUBLIC
   "$<INSTALL_INTERFACE:include>"
 )
 
-if(BUILD_TESTS)
-  add_executable(tests
-    ${CMAKE_CURRENT_SOURCE_DIR}/tests/test.cpp
-  )
-  target_link_libraries(tests ${PROJECT_NAME} GTest::gtest_main)
-  enable_testing()
-  add_test(NAME unit_tests COMMAND tests)
-endif()
-
 if(BUILD_COVERAGE)
   set(ENABLE_COVERAGE ON CACHE BOOL "Enable coverage build." FORCE)
   list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/tools/coverage/cmake")
@@ -91,6 +82,17 @@ install(TARGETS ${PROJECT_NAME} demo
   LIBRARY DESTINATION lib
   INCLUDES DESTINATION include
 )
+
+
+if(BUILD_TESTS)
+  add_executable(tests
+    ${CMAKE_CURRENT_SOURCE_DIR}/tests/test.cpp
+  )
+  target_link_libraries(tests ${PROJECT_NAME} GTest::gtest_main)
+  enable_testing()
+  add_test(NAME unit_tests COMMAND tests)
+endif()
+
 
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/ DESTINATION include)
 
